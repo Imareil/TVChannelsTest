@@ -10,7 +10,7 @@ protocol RouterMain {
 
 protocol RouterProtocol: RouterMain {
     func initialViewController()
-    func showDetails()
+    func showDetails(channelName: String, programItem: ProgramItem)
 }
 
 final class Router: RouterProtocol {
@@ -29,9 +29,12 @@ final class Router: RouterProtocol {
         }
     }
 
-    func showDetails() {
+    func showDetails(channelName: String, programItem: ProgramItem) {
         if let navigationController = navigationController {
-            guard let detailViewController = assembly?.createDetailsModule(router: self) else { return }
+            guard let detailViewController = assembly?.createDetailsModule(
+                channelName: channelName,
+                programItem: programItem
+            ) else { return }
             navigationController.pushViewController(detailViewController, animated: true)
         }
     }

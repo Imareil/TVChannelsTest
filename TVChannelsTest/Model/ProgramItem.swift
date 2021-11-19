@@ -28,5 +28,3 @@ final class ProgramItem {
         self.name = name
     }
 }
-
-

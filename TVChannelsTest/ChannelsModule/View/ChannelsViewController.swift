@@ -4,17 +4,16 @@
 import UIKit
 
 final class ChannelsViewController: UIViewController {
-
-    //MARK: - Private Properties
+    // MARK: - UI Components
 
     private let scrollView = UIScrollView()
     private lazy var collectionView = UICollectionView()
 
-    //MARK: - Public Properties
+    // MARK: - Public Properties
 
     var presenter: ChannelsViewPresenterProtocol?
 
-    //MARK: - Viewcontroller (ChannelsViewController)
+    // MARK: - Viewcontroller (ChannelsViewController)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +22,7 @@ final class ChannelsViewController: UIViewController {
         runMethods()
     }
 
-    //MARK: - Viewcontroller (ChannelsViewController)
+    // MARK: - Viewcontroller (ChannelsViewController)
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -107,6 +106,21 @@ extension ChannelsViewController: ChannelsViewProtocol {
             self.setScrollViewContentSize(width: width, height: height)
             self.setCollectionViewSize(width: width, height: height)
             self.collectionView.reloadData()
+        }
+    }
+}
+
+extension ChannelsViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch (indexPath.section, indexPath.row) {
+        case (0, 0):
+            break
+        case (_, 0):
+            break
+        case (0, _):
+            break
+        case let (section, row):
+            presenter?.showDetails(channelNumber: section - 1, itemNumber: row - 1)
         }
     }
 }

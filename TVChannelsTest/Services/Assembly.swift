@@ -5,7 +5,8 @@ import UIKit
 
 protocol AssemblyProtocol {
     func createChannelsModule(router: RouterProtocol) -> UIViewController
-    func createDetailsModule(router: RouterProtocol) -> UIViewController
+    func createDetailsModule(channelName: String, programItem: ProgramItem)
+        -> UIViewController
 }
 
 final class Assembly: AssemblyProtocol {
@@ -18,7 +19,10 @@ final class Assembly: AssemblyProtocol {
         return view
     }
 
-    func createDetailsModule(router: RouterProtocol) -> UIViewController {
-        UIViewController()
+    func createDetailsModule(channelName: String, programItem: ProgramItem) -> UIViewController {
+        let view = DetailsViewController()
+        let presenter = DetailsPresenter(channelName: channelName, programItem: programItem)
+        view.presenter = presenter
+        return view
     }
 }

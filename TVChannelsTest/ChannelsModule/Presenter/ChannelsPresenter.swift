@@ -15,10 +15,11 @@ protocol ChannelsViewPresenterProtocol: AnyObject {
     var interactor: ChannelsInteractorProtocol? { get set }
 
     func getChannels(view: ChannelsViewProtocol)
+    func showDetails(channelNumber: Int, itemNumber: Int)
 }
 
 final class ChannelsPresenter: ChannelsViewPresenterProtocol {
-    //MARK: - Public Properties
+    // MARK: - Public Properties
 
     var channels: [Channel]?
     var programItems: [[ProgramItem]]?
@@ -27,14 +28,14 @@ final class ChannelsPresenter: ChannelsViewPresenterProtocol {
     var interactor: ChannelsInteractorProtocol?
     weak var view: ChannelsViewProtocol?
 
-    //MARK: - Init
+    // MARK: - Init
 
     init(router: RouterProtocol, interactor: ChannelsInteractorProtocol) {
         self.router = router
         self.interactor = interactor
     }
 
-    //MARK: - Public Methods
+    // MARK: - Public Methods
 
     func getChannels(view: ChannelsViewProtocol) {
         interactor?.getProgramData { [weak self] channels, programItems in
@@ -42,5 +43,18 @@ final class ChannelsPresenter: ChannelsViewPresenterProtocol {
             self?.programItems = programItems
             view.updateData()
         }
+    }
+
+    func showDetails(channelNumber: Int, itemNumber: Int) {
+        guard let channelName = channels?[channelNumber].callSign,
+              let programName = programItems?[channelNumber][itemNumber].name,
+              let programStartTime = programItems?[channelNumber][itemNumber].startTime,
+              let programLength = programItems?[channelNumber][itemNumber].length,
+              let startTime = interactor?.convertTime(isoTime: programStartTime)[1]
+        else { return }
+
+        guard let programItem = ProgramItem(startTime: startTime, length: programLength, name: programName)
+        else { return }
+        router?.showDetails(channelName: channelName, programItem: programItem)
     }
 }

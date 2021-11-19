@@ -4,14 +4,13 @@
 import UIKit
 
 final class ChannelCollectionViewCell: UICollectionViewCell {
-
-    //MARK: - private Properties
+    // MARK: - UI Components
 
     private let indexLabel = UILabel()
     private let channelNameLabel = UILabel()
     private let view = UIView()
 
-    //MARK: - Public Methods
+    // MARK: - Public Methods
 
     func configureCell(index: Int, channelName: String?) {
         view.frame = CGRect(x: 5, y: 5, width: bounds.width - 10, height: bounds.height - 10)
