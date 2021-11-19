@@ -30,6 +30,8 @@
 		2CDE05E827353005000D4E76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CDE05E627353005000D4E76 /* LaunchScreen.storyboard */; };
 		2CDE05F327353005000D4E76 /* TVChannelsTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE05F227353005000D4E76 /* TVChannelsTestTests.swift */; };
 		2CDE05FE27353005000D4E76 /* TVChannelsTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE05FD27353005000D4E76 /* TVChannelsTestUITests.swift */; };
+		2CF9C2E0274793330042895E /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF9C2DF274793330042895E /* DetailsViewController.swift */; };
+		2CF9C2E4274793680042895E /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF9C2E3274793680042895E /* DetailsPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,8 @@
 		2CDE05F927353005000D4E76 /* TVChannelsTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVChannelsTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CDE05FD27353005000D4E76 /* TVChannelsTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVChannelsTestUITests.swift; sourceTree = "<group>"; };
 		2CDE05FF27353005000D4E76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2CF9C2DF274793330042895E /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		2CF9C2E3274793680042895E /* DetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,8 +151,8 @@
 			isa = PBXGroup;
 			children = (
 				2C30A74F2735335C0076054F /* View */,
-				2C30A755273533A50076054F /* Presenter */,
 				2C30A752273533860076054F /* Interactor */,
+				2C30A755273533A50076054F /* Presenter */,
 			);
 			path = ChannelsModule;
 			sourceTree = "<group>";
@@ -215,8 +219,9 @@
 		2CDE05DA27353003000D4E76 /* TVChannelsTest */ = {
 			isa = PBXGroup;
 			children = (
-				2C30A74C273533120076054F /* App */,
 				2C30A756273533D40076054F /* ChannelsModule */,
+				2CF9C2E2274793440042895E /* DetailsModule */,
+				2C30A74C273533120076054F /* App */,
 				2C30A75E27353ADD0076054F /* Model */,
 				2C30A76327353DE10076054F /* Helpers */,
 				2CDE05E927353005000D4E76 /* Info.plist */,
@@ -241,6 +246,31 @@
 				2CDE05FF27353005000D4E76 /* Info.plist */,
 			);
 			path = TVChannelsTestUITests;
+			sourceTree = "<group>";
+		};
+		2CF9C2E12747933A0042895E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2CF9C2DF274793330042895E /* DetailsViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2CF9C2E2274793440042895E /* DetailsModule */ = {
+			isa = PBXGroup;
+			children = (
+				2CF9C2E12747933A0042895E /* View */,
+				2CF9C2E72747937D0042895E /* Presenter */,
+			);
+			path = DetailsModule;
+			sourceTree = "<group>";
+		};
+		2CF9C2E72747937D0042895E /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2CF9C2E3274793680042895E /* DetailsPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -431,6 +461,7 @@
 				2C30A74E273533540076054F /* ChannelsViewController.swift in Sources */,
 				2C5492BE2736C04200D828C7 /* TimeCollectionViewCell.swift in Sources */,
 				2C30A76B273552E80076054F /* ProgramItem.swift in Sources */,
+				2CF9C2E0274793330042895E /* DetailsViewController.swift in Sources */,
 				2C54019E27452D5D0041C096 /* CellIdentifiers.swift in Sources */,
 				2C30A7582735342A0076054F /* Router.swift in Sources */,
 				2C30A76227353DBD0076054F /* Hosts.swift in Sources */,
@@ -438,6 +469,7 @@
 				2CD5350D27462F590013A163 /* Constants.swift in Sources */,
 				2C30A76027353BEF0076054F /* ChannelAPIService.swift in Sources */,
 				2CDE05DE27353003000D4E76 /* SceneDelegate.swift in Sources */,
+				2CF9C2E4274793680042895E /* DetailsPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

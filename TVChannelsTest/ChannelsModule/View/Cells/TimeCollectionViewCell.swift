@@ -4,13 +4,12 @@
 import UIKit
 
 final class TimeCollectionViewCell: UICollectionViewCell {
-
-    //MARK: - Provate Properties
+    // MARK: - UI Components
 
     private let timeLabel = UILabel()
     private let view = UIView()
 
-    //MARK: - Public Methods
+    // MARK: - Public Methods
 
     func configureCell(time: String?) {
         view.frame = CGRect(x: 5, y: 5, width: bounds.width - 10, height: bounds.height - 10)

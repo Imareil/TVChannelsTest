@@ -5,23 +5,23 @@ import Foundation
 
 protocol ChannelsInteractorProtocol: AnyObject {
     var channelsAPIService: ChannelsAPIProtocol? { get set }
+    func convertTime(isoTime: String) -> [String]
     func getProgramData(complition: @escaping ([Channel], [[ProgramItem]]) -> ())
 }
 
 final class ChannelsInteractor: ChannelsInteractorProtocol {
-
-    //MARK: - Public Properties
+    // MARK: - Public Properties
 
     var channelsAPIService: ChannelsAPIProtocol?
     weak var channelsPresenter: ChannelsViewPresenterProtocol?
 
-    //MARK: - Init
+    // MARK: - Init
 
     init(channelsAPIService: ChannelsAPIProtocol) {
         self.channelsAPIService = channelsAPIService
     }
 
-    //MARK: - Public Methods
+    // MARK: - Public Methods
 
     func getProgramData(complition: @escaping ([Channel], [[ProgramItem]]) -> ()) {
         var channels: [Channel] = []
@@ -47,7 +47,18 @@ final class ChannelsInteractor: ChannelsInteractorProtocol {
         }
     }
 
-    //MARK: - Private Methods
+    func convertTime(isoTime: String) -> [String] {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = Constants.dateFormat
+        if let date = dateFormatter.date(from: isoTime) {
+            let stringDate = "\(date)"
+            return stringDate.components(separatedBy: " ")
+        } else {
+            return [""]
+        }
+    }
+
+    // MARK: - Private Methods
 
     private func getChannels(comlition: @escaping ([Channel]) -> ()) {
         let url = Hosts.channelsHost
@@ -92,17 +103,6 @@ final class ChannelsInteractor: ChannelsInteractorProtocol {
         }
 
         complition(channels, programItems)
-    }
-
-    private func convertTime(isoTime: String) -> [String] {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = Constants.dateFormat
-        if let date = dateFormatter.date(from: isoTime) {
-            let stringDate = "\(date)"
-            return stringDate.components(separatedBy: " ")
-        } else {
-            return [""]
-        }
     }
 
     private func checkstartTime(startTime: String) -> Int {

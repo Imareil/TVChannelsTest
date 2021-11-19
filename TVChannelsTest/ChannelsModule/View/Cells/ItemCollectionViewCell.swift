@@ -4,13 +4,12 @@
 import UIKit
 
 final class ItemCollectionViewCell: UICollectionViewCell {
-
-    //MARK: - Private Properties
+    // MARK: - UI Components
 
     private let itemNameLabel = UILabel()
     private let view = UIView()
 
-    //MARK: - Public Methods
+    // MARK: - Public Methods
 
     func configureCell(itemName: String) {
         view.frame = CGRect(x: 5, y: 5, width: bounds.width - 10, height: bounds.height - 10)
