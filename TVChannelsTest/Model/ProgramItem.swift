@@ -19,4 +19,14 @@ final class ProgramItem {
         length = json["length"].intValue
         name = json["name"].stringValue
     }
+
+    convenience init?(startTime: String, length: Int, name: String) {
+        self.init()
+
+        self.startTime = startTime
+        self.length = length
+        self.name = name
+    }
 }
+
+
