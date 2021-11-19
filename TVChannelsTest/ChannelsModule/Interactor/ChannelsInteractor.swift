@@ -4,18 +4,26 @@
 import Foundation
 
 protocol ChannelsInteractorProtocol: AnyObject {
-    func getProgramData()
+    var channelsAPIService: ChannelsAPIProtocol? { get set }
+    func getProgramData(complition: @escaping ([Channel], [[ProgramItem]]) -> ())
 }
 
 final class ChannelsInteractor: ChannelsInteractorProtocol {
+
+    //MARK: - Public Properties
+
     var channelsAPIService: ChannelsAPIProtocol?
     weak var channelsPresenter: ChannelsViewPresenterProtocol?
+
+    //MARK: - Init
 
     init(channelsAPIService: ChannelsAPIProtocol) {
         self.channelsAPIService = channelsAPIService
     }
 
-    func getProgramData() {
+    //MARK: - Public Methods
+
+    func getProgramData(complition: @escaping ([Channel], [[ProgramItem]]) -> ()) {
         var channels: [Channel] = []
         var items: [ProgramItem] = []
 
@@ -33,9 +41,13 @@ final class ChannelsInteractor: ChannelsInteractorProtocol {
         }
 
         dispatchGroup.notify(queue: .global()) {
-            self.setTVProgram(channels: channels, items: items)
+            self.setTVProgram(channels: channels, items: items) { channels, programItems in
+                complition(channels, programItems)
+            }
         }
     }
+
+    //MARK: - Private Methods
 
     private func getChannels(comlition: @escaping ([Channel]) -> ()) {
         let url = Hosts.channelsHost
@@ -51,13 +63,59 @@ final class ChannelsInteractor: ChannelsInteractorProtocol {
         })
     }
 
-    private func setTVProgram(channels: [Channel], items: [ProgramItem]) {
-        var tvProgram: [Int: [ProgramItem]] = [:]
+    private func setTVProgram(
+        channels: [Channel],
+        items: [ProgramItem],
+        complition: ([Channel], [[ProgramItem]]) -> ()
+    ) {
+        var programItems: [[ProgramItem]] = []
 
         let channelIDs = channels.map(\.id)
         for id in channelIDs {
-            let programs = items.filter { id == $0.channelID }
-            tvProgram[id] = programs
+            var programs = items
+                .filter { id == $0.channelID }
+                .filter { convertTime(isoTime: $0.startTime).first == Constants.currentDate }
+
+            let checkedStartTime = checkstartTime(startTime: programs.first?.startTime ?? "")
+
+            if checkedStartTime > 0 {
+                guard let prItem = ProgramItem(
+                    startTime: Constants.startTime,
+                    length: checkedStartTime,
+                    name: Constants.noProgram
+                )
+                else { return }
+                programs.insert(prItem, at: 0)
+            }
+
+            programItems.append(programs)
         }
+
+        complition(channels, programItems)
+    }
+
+    private func convertTime(isoTime: String) -> [String] {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = Constants.dateFormat
+        if let date = dateFormatter.date(from: isoTime) {
+            let stringDate = "\(date)"
+            return stringDate.components(separatedBy: " ")
+        } else {
+            return [""]
+        }
+    }
+
+    private func checkstartTime(startTime: String) -> Int {
+        let convertedTime = convertTime(isoTime: startTime)
+        let hours = separateTime(time: convertedTime[1])[0] - 1
+        let minutes = separateTime(time: convertedTime[1])[1]
+
+        let time = hours * 60 + minutes
+        return time
+    }
+
+    private func separateTime(time: String) -> [Int] {
+        let separatedTime = time.components(separatedBy: ":").compactMap(Int.init)
+        return separatedTime
     }
 }
