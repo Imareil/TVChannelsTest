@@ -113,11 +113,7 @@ extension ChannelsViewController: ChannelsViewProtocol {
 extension ChannelsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch (indexPath.section, indexPath.row) {
-        case (0, 0):
-            break
-        case (_, 0):
-            break
-        case (0, _):
+        case (0, 0), (_, 0), (0, _):
             break
         case let (section, row):
             presenter?.showDetails(channelNumber: section - 1, itemNumber: row - 1)
@@ -132,11 +128,7 @@ extension ChannelsViewController: UICollectionViewDelegateFlowLayout {
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         switch (indexPath.section, indexPath.row) {
-        case (0, 0):
-            return CGSize(width: Constants.itemWidth, height: Constants.itemHeight)
-        case (_, 0):
-            return CGSize(width: Constants.itemWidth, height: Constants.itemHeight)
-        case (0, _):
+        case (0, 0), (_, 0), (0, _):
             return CGSize(width: Constants.itemWidth, height: Constants.itemHeight)
         case let (section, row):
             guard let width = presenter?.programItems?[section - 1][row - 1].length

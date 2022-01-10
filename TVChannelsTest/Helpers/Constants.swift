@@ -12,4 +12,5 @@ enum Constants {
     static let itemHeight = 80
     static let noProgram = "No Program"
     static let numberOfTimeItems = 47
+    static let zero = 0.0
 }
