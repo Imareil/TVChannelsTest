@@ -54,7 +54,7 @@ final class ChannelsViewController: UIViewController {
     }
 
     private func configureScrollView() {
-        scrollView.backgroundColor = .lightGray
+        scrollView.backgroundColor = Colors.backGround
         scrollView.alwaysBounceHorizontal = true
         view.addSubview(scrollView)
     }
@@ -66,7 +66,7 @@ final class ChannelsViewController: UIViewController {
             frame: scrollView.bounds,
             collectionViewLayout: layout
         )
-        collectionView.backgroundColor = .lightGray
+        collectionView.backgroundColor = Colors.backGround
 
         registerCells()
 
@@ -173,7 +173,7 @@ extension ChannelsViewController: UICollectionViewDataSource {
                 for: indexPath
             ) as? TimeCollectionViewCell else { return UICollectionViewCell() }
 
-            cell.configureCell(time: "Today, \(Constants.currentDate)")
+            cell.configureCell(time: "Today,\n\(Constants.currentDate)")
 
             return cell
 

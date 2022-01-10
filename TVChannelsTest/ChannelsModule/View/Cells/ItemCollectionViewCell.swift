@@ -1,6 +1,7 @@
 // ItemCollectionViewCell.swift
 // Copyright © Dmi3. All rights reserved.
 
+import SnapKit
 import UIKit
 
 final class ItemCollectionViewCell: UICollectionViewCell {
@@ -12,14 +13,30 @@ final class ItemCollectionViewCell: UICollectionViewCell {
     // MARK: - Public Methods
 
     func configureCell(itemName: String) {
-        view.frame = CGRect(x: 5, y: 5, width: bounds.width - 10, height: bounds.height - 10)
-        view.backgroundColor = .darkGray
+        view.backgroundColor = Colors.cellBackGround
+        view.layer.cornerRadius = Constants.cellCornerRadius
+        view.layer.borderWidth = Constants.borderWidth
+        view.layer.borderColor = Colors.border?.cgColor
         addSubview(view)
 
-        itemNameLabel.frame = CGRect(x: 5, y: 0, width: view.bounds.width - 10, height: 20)
         itemNameLabel.center.y = view.center.y
         itemNameLabel.text = itemName
-        backgroundColor = .lightGray
+        itemNameLabel.numberOfLines = 0
+        backgroundColor = Colors.backGround
         view.addSubview(itemNameLabel)
+
+        makeConstraints()
+    }
+
+    private func makeConstraints() {
+        view.snp.makeConstraints {
+            $0.leading.trailing.top.bottom.equalToSuperview().inset(5)
+        }
+
+        itemNameLabel.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(10)
+            $0.centerY.equalToSuperview()
+            $0.height.equalToSuperview()
+        }
     }
 }

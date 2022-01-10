@@ -32,7 +32,7 @@ final class DetailsViewController: UIViewController {
     }
 
     private func configureView() {
-        view.backgroundColor = .lightGray
+        view.backgroundColor = Colors.backGround
     }
 
     private func addLabels() {
