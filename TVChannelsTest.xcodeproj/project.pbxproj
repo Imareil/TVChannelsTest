@@ -22,6 +22,7 @@
 		2C5492BB2736C02100D828C7 /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5492BA2736C02100D828C7 /* ItemCollectionViewCell.swift */; };
 		2C5492BE2736C04200D828C7 /* TimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5492BD2736C04200D828C7 /* TimeCollectionViewCell.swift */; };
 		2C5492C02736C04B00D828C7 /* ChannelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5492BF2736C04B00D828C7 /* ChannelCollectionViewCell.swift */; };
+		2C9AC7B0278C197F00B63B6F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2C9AC7AF278C197F00B63B6F /* SnapKit */; };
 		2CD5350D27462F590013A163 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5350C27462F590013A163 /* Constants.swift */; };
 		2CDE05DC27353003000D4E76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE05DB27353003000D4E76 /* AppDelegate.swift */; };
 		2CDE05DE27353003000D4E76 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE05DD27353003000D4E76 /* SceneDelegate.swift */; };
@@ -88,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C9AC7B0278C197F00B63B6F /* SnapKit in Frameworks */,
 				2C30A76927354F040076054F /* SwiftyJSON in Frameworks */,
 				2C30A76627354E9B0076054F /* Alamofire in Frameworks */,
 			);
@@ -294,6 +296,7 @@
 			packageProductDependencies = (
 				2C30A76527354E9B0076054F /* Alamofire */,
 				2C30A76827354F040076054F /* SwiftyJSON */,
+				2C9AC7AF278C197F00B63B6F /* SnapKit */,
 			);
 			productName = TVChannelsTest;
 			productReference = 2CDE05D827353003000D4E76 /* TVChannelsTest.app */;
@@ -369,6 +372,7 @@
 			packageReferences = (
 				2C30A76427354E9B0076054F /* XCRemoteSwiftPackageReference "Alamofire" */,
 				2C30A76727354F040076054F /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				2C9AC7AE278C197F00B63B6F /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 2CDE05D927353003000D4E76 /* Products */;
 			projectDirPath = "";
@@ -820,6 +824,14 @@
 				minimumVersion = 5.0.1;
 			};
 		};
+		2C9AC7AE278C197F00B63B6F /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -832,6 +844,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2C30A76727354F040076054F /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
+		};
+		2C9AC7AF278C197F00B63B6F /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2C9AC7AE278C197F00B63B6F /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

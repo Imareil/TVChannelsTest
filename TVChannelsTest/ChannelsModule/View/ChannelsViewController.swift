@@ -173,7 +173,7 @@ extension ChannelsViewController: UICollectionViewDataSource {
                 for: indexPath
             ) as? TimeCollectionViewCell else { return UICollectionViewCell() }
 
-            cell.configureCell(time: "Today, \(Constants.currentDate)")
+            cell.configureCell(time: "Today,\n\(Constants.currentDate)")
 
             return cell
 

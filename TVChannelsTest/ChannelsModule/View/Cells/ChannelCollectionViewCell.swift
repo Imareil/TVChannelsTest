@@ -13,7 +13,6 @@ final class ChannelCollectionViewCell: UICollectionViewCell {
     // MARK: - Public Methods
 
     func configureCell(index: Int, channelName: String?) {
-        view.frame = CGRect(x: 5, y: 5, width: bounds.width - 10, height: bounds.height - 10)
         view.backgroundColor = .darkGray
         addSubview(view)
 
@@ -25,5 +24,25 @@ final class ChannelCollectionViewCell: UICollectionViewCell {
         channelNameLabel.text = channelName
         backgroundColor = .lightGray
         view.addSubview(channelNameLabel)
+
+        makeConstraints()
+    }
+
+    private func makeConstraints() {
+        view.snp.makeConstraints {
+            $0.leading.trailing.top.bottom.equalToSuperview().inset(5)
+        }
+
+        indexLabel.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(10)
+            $0.top.equalToSuperview().inset(5)
+            $0.height.equalTo(30)
+        }
+
+        channelNameLabel.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(10)
+            $0.top.equalTo(indexLabel.snp.bottomMargin).offset(10)
+            $0.height.equalTo(30)
+        }
     }
 }
