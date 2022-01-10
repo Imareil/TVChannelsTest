@@ -1,7 +1,7 @@
 // Constants.swift
 // Copyright © Dmi3. All rights reserved.
 
-import Foundation
+import UIKit
 
 /// Constants
 enum Constants {
@@ -13,4 +13,6 @@ enum Constants {
     static let noProgram = "No Program"
     static let numberOfTimeItems = 47
     static let zero = 0.0
+    static let borderWidth: CGFloat = 2
+    static let cellCornerRadius: CGFloat = 8
 }

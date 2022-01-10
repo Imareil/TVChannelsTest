@@ -13,13 +13,17 @@ final class TimeCollectionViewCell: UICollectionViewCell {
     // MARK: - Public Methods
 
     func configureCell(time: String?) {
-        view.backgroundColor = .darkGray
+        view.backgroundColor = Colors.cellBackGround
+        view.layer.cornerRadius = Constants.cellCornerRadius
+        view.layer.borderWidth = Constants.borderWidth
+        view.layer.borderColor = Colors.border?.cgColor
+
         addSubview(view)
 
         timeLabel.text = time
         timeLabel.numberOfLines = 0
         timeLabel.textAlignment = .center
-        backgroundColor = .lightGray
+        backgroundColor = Colors.backGround
         view.addSubview(timeLabel)
 
         makeConstraints()

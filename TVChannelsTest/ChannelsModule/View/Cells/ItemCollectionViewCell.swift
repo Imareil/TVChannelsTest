@@ -13,12 +13,16 @@ final class ItemCollectionViewCell: UICollectionViewCell {
     // MARK: - Public Methods
 
     func configureCell(itemName: String) {
-        view.backgroundColor = .darkGray
+        view.backgroundColor = Colors.cellBackGround
+        view.layer.cornerRadius = Constants.cellCornerRadius
+        view.layer.borderWidth = Constants.borderWidth
+        view.layer.borderColor = Colors.border?.cgColor
         addSubview(view)
 
         itemNameLabel.center.y = view.center.y
         itemNameLabel.text = itemName
-        backgroundColor = .lightGray
+        itemNameLabel.numberOfLines = 0
+        backgroundColor = Colors.backGround
         view.addSubview(itemNameLabel)
 
         makeConstraints()
@@ -30,9 +34,9 @@ final class ItemCollectionViewCell: UICollectionViewCell {
         }
 
         itemNameLabel.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(5)
+            $0.leading.trailing.equalToSuperview().inset(10)
             $0.centerY.equalToSuperview()
-            $0.height.equalTo(20)
+            $0.height.equalToSuperview()
         }
     }
 }
