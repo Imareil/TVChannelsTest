@@ -34,15 +34,13 @@ final class ChannelCollectionViewCell: UICollectionViewCell {
         }
 
         indexLabel.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(10)
-            $0.top.equalToSuperview().inset(5)
-            $0.height.equalTo(30)
+            $0.leading.trailing.equalToSuperview().inset(5)
+            $0.top.equalToSuperview().inset(10)
         }
 
         channelNameLabel.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(10)
-            $0.top.equalTo(indexLabel.snp.bottomMargin).offset(10)
-            $0.height.equalTo(30)
+            $0.leading.trailing.equalToSuperview().inset(5)
+            $0.bottom.equalToSuperview().inset(10)
         }
     }
 }
