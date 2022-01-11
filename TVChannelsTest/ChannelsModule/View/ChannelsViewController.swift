@@ -6,21 +6,13 @@ import UIKit
 final class ChannelsViewController: UIViewController {
     // MARK: - UI Components
 
-    private var channelsView: ChannelsView!
-
-    // MARK: - Public Properties
-
-    var presenter: ChannelsViewPresenterProtocol?
+    private let _view: ChannelsView
 
     // MARK: - Init
 
     init(presenter: ChannelsViewPresenterProtocol) {
+        _view = ChannelsView(presenter: presenter)
         super.init(nibName: nil, bundle: nil)
-        self.presenter = presenter
-        channelsView = ChannelsView(presenter: presenter)
-        channelsView.backgroundColor = Colors.backGround
-        view = channelsView
-        presenter.getChannels(view: channelsView)
     }
 
     // MARK: - Viewcontroller (ChannelsViewController)
@@ -28,5 +20,13 @@ final class ChannelsViewController: UIViewController {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - ViewController (ChannelsViewController)
+
+    override func loadView() {
+        view = _view
+        view.backgroundColor = Colors.backGround
+        title = Constants.channelcVCTitle
     }
 }

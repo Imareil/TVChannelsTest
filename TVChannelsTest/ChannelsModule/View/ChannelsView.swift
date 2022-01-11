@@ -13,5 +13,6 @@ final class ChannelsView: UIView {
         self.presenter = presenter
         addSubview(collectionView)
         configureConstraints()
+        presenter.getChannels(view: self)
     }
 }

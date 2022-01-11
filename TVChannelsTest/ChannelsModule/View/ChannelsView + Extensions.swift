@@ -46,7 +46,7 @@ extension ChannelsView {
 
         switch section {
         case 0:
-            for index in 0 ..< Constants.numberOfTimeItems {
+            for _ in 0 ..< Constants.numberOfTimeItems {
                 let itemSize = NSCollectionLayoutSize(
                     widthDimension: .absolute(CGFloat(Constants.itemWidth)),
                     heightDimension: .absolute(CGFloat(Constants.itemHeight))
