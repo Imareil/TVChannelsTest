@@ -11,11 +11,11 @@ protocol AssemblyProtocol {
 
 final class Assembly: AssemblyProtocol {
     func createChannelsModule(router: RouterProtocol) -> UIViewController {
-        let view = ChannelsViewController()
         let channelsAPIService = ChannelsAPIService()
         let interactor = ChannelsInteractor(channelsAPIService: channelsAPIService)
         let presenter = ChannelsPresenter(router: router, interactor: interactor)
-        view.presenter = presenter
+        let view = ChannelsViewController(presenter: presenter)
+        view.title = Constants.channelcVCTitle
         return view
     }
 
