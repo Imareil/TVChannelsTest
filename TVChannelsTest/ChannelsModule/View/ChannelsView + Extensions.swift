@@ -7,7 +7,6 @@
 //
 //  Created by Дмитрий Фёдоров on 10.01.2022.
 //
-import Foundation
 import UIKit
 
 extension ChannelsView {
@@ -55,7 +54,7 @@ extension ChannelsView {
                 items.append(item)
             }
         case let sec:
-            let programItems = presenter?.programItems?[sec - 1]
+            let programItems = presenter?.programItems?[safeIndex: sec - 1]
             let nameItemSize = NSCollectionLayoutSize(
                 widthDimension: .absolute(CGFloat(Constants.itemWidth)),
                 heightDimension: .absolute(CGFloat(Constants.itemHeight))
@@ -90,7 +89,7 @@ extension ChannelsView {
             positions.append("\(index):00")
             positions.append("\(index):30")
         }
-        return positions[position]
+        return positions[safeIndex: position] ?? ""
     }
 }
 
@@ -105,7 +104,7 @@ extension ChannelsView: UICollectionViewDataSource {
         case 0:
             return Constants.numberOfTimeItems
         case let section:
-            guard let count = presenter?.programItems?[section - 1].count else { return 0 }
+            guard let count = presenter?.programItems?[safeIndex: section - 1]?.count else { return 0 }
             return count
         }
     }
@@ -119,7 +118,10 @@ extension ChannelsView: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: CellIdentifiers.TimeCell,
                 for: indexPath
-            ) as? TimeCollectionViewCell else { return UICollectionViewCell() }
+            ) as? TimeCollectionViewCell else {
+                assertionFailure("Cell not found")
+                return UICollectionViewCell()
+            }
 
             cell.configureCell(time: "Today,\n\(Constants.currentDate)")
 
@@ -129,7 +131,10 @@ extension ChannelsView: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: CellIdentifiers.TimeCell,
                 for: indexPath
-            ) as? TimeCollectionViewCell else { return UICollectionViewCell() }
+            ) as? TimeCollectionViewCell else {
+                assertionFailure("No cell found")
+                return UICollectionViewCell()
+            }
 
             cell.configureCell(time: configureTimeText(position: row - 1))
 
@@ -139,11 +144,14 @@ extension ChannelsView: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: CellIdentifiers.ChannelCell,
                 for: indexPath
-            ) as? ChannelCollectionViewCell else { return UICollectionViewCell() }
+            ) as? ChannelCollectionViewCell else {
+                assertionFailure("No cell found")
+                return UICollectionViewCell()
+            }
 
             cell.configureCell(
                 index: indexPath.section,
-                channelName: presenter?.channels?[section - 1].callSign
+                channelName: presenter?.channels?[safeIndex: section - 1]?.callSign
             )
             return cell
 
@@ -151,9 +159,15 @@ extension ChannelsView: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: CellIdentifiers.ItemCell,
                 for: indexPath
-            ) as? ItemCollectionViewCell else { return UICollectionViewCell() }
-            guard let name = presenter?.programItems?[section - 1][row - 1].name
-            else { return UICollectionViewCell() }
+            ) as? ItemCollectionViewCell else {
+                assertionFailure("No cell found")
+                return UICollectionViewCell()
+            }
+            guard let name = presenter?.programItems?[safeIndex: section - 1]?[safeIndex: row - 1]?.name
+            else {
+                assertionFailure("No cell found")
+                return UICollectionViewCell()
+            }
 
             cell.configureCell(itemName: name)
 
