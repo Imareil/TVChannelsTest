@@ -20,7 +20,7 @@ final class ChannelsViewController: UIViewController {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         assertionFailure("Fatal error")
-        fatalError("init(coder:) has not been implemented")
+        return nil
     }
 
     // MARK: - ViewController (ChannelsViewController)
@@ -28,6 +28,6 @@ final class ChannelsViewController: UIViewController {
     override func loadView() {
         view = _view
         view.backgroundColor = Colors.backGround
-        title = Constants.channelcVCTitle
+        title = Constants.channelsVCTitle
     }
 }
