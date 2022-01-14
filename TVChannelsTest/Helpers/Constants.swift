@@ -15,4 +15,5 @@ enum Constants {
     static let zero = 0.0
     static let borderWidth: CGFloat = 2
     static let cellCornerRadius: CGFloat = 8
+    static let channelsVCTitle = "TV Program"
 }

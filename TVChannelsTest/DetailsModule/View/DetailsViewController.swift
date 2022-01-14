@@ -15,6 +15,13 @@ final class DetailsViewController: UIViewController {
 
     var presenter: DetailsViewPresenterProtocol?
 
+    // MARK: - Init
+
+    convenience init(presenter: DetailsViewPresenterProtocol) {
+        self.init()
+        self.presenter = presenter
+    }
+
     // MARK: - ViewController (DetailsViewController)
 
     override func viewDidLoad() {
