@@ -19,6 +19,7 @@ final class ChannelsViewController: UIViewController {
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
+        assertionFailure("Fatal error")
         fatalError("init(coder:) has not been implemented")
     }
 
